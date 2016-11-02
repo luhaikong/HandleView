@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity
   private float[] mTouchPosition = null;
   private HandleView mHandleView;
 
-  @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity
     mHandleView.setHandleReaction(this);
   }
 
-  @Override public boolean onTouch(View view, MotionEvent motionEvent) {
+  @Override
+  public boolean onTouch(View view, MotionEvent motionEvent) {
     switch (motionEvent.getAction()) {
       case MotionEvent.ACTION_DOWN:
       case MotionEvent.ACTION_MOVE: {
@@ -51,7 +53,9 @@ public class MainActivity extends AppCompatActivity
     return false;
   }
 
-  @Override public float[] getTouchPosition() {
+  @Override
+  public float[] getTouchPosition() {
     return mTouchPosition;
   }
+
 }

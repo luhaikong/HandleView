@@ -7,7 +7,9 @@
 
   <com.hayukleung.handle.HandleView
       android:id="@+id/handleView"
-      android:layout_width="80dp"
+      android:minWidth="80dp"
+      android:minHeight="80dp"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom|end"
       android:layout_marginBottom="60dp"

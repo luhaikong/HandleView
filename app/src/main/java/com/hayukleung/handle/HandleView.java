@@ -41,43 +41,38 @@ public class HandleView extends View {
    * If mode is AT_MOST, return the child size instead of the parent size
    * (unless it is too big).
    */
-  private static int getDefaultSize2(int size, int measureSpec) {
+  private int getDefaultSize2(int size, int measureSpec) {
     int result = size;
     int specMode = MeasureSpec.getMode(measureSpec);
     int specSize = MeasureSpec.getSize(measureSpec);
 
     switch (specMode) {
-      case MeasureSpec.UNSPECIFIED:
+      case MeasureSpec.UNSPECIFIED://在尺寸上设置限制条件
         result = size;
         break;
-      case MeasureSpec.AT_MOST:
+      case MeasureSpec.AT_MOST://最大可获得的空间
         result = Math.min(size, specSize);
         break;
-      case MeasureSpec.EXACTLY:
+      case MeasureSpec.EXACTLY://精确的尺寸
         result = specSize;
         break;
     }
     return result;
   }
 
-  public void setHandleReaction(HandleReaction handleReaction) {
-    mHandleReaction = handleReaction;
-  }
-
-  @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+  @Override
+  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     setMeasuredDimension(getDefaultSize2(getSuggestedMinimumWidth(), widthMeasureSpec),
-        getDefaultSize2(getSuggestedMinimumHeight(), heightMeasureSpec));
-    int childWidthSize = getMeasuredWidth();
-    widthMeasureSpec = MeasureSpec.makeMeasureSpec(childWidthSize, MeasureSpec.EXACTLY);
-    heightMeasureSpec = MeasureSpec.makeMeasureSpec(childWidthSize, MeasureSpec.EXACTLY);
-    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            getDefaultSize2(getSuggestedMinimumHeight(), heightMeasureSpec));
   }
 
-  @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+  @Override
+  protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
     super.onLayout(changed, left, top, right, bottom);
   }
 
-  @Override protected void onDraw(Canvas canvas) {
+  @Override
+  protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
 
     canvas.drawColor(Color.TRANSPARENT);
@@ -118,8 +113,18 @@ public class HandleView extends View {
     canvas.save();
   }
 
-  public interface HandleReaction {
+  /**
+   * 设置触摸监听器
+   * @param handleReaction
+   */
+  public void setHandleReaction(HandleReaction handleReaction) {
+    mHandleReaction = handleReaction;
+  }
 
+  /**
+   * 触摸监听接口
+   */
+  public interface HandleReaction {
     float[] getTouchPosition();
   }
 }
